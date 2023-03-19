@@ -5,6 +5,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
+/**
+ * Model that maps to the WeatherInfo table entries in H2 database.
+ */
 @Entity
 @Table(name = "WEATHERINFO")
 public class WeatherModel {
@@ -57,5 +60,38 @@ public class WeatherModel {
 
     public String getWeatherPhenomenon() {
         return weatherPhenomenon;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setWmo(Integer wmo) {
+        this.wmo = wmo;
+    }
+
+    public void setAirTemperature(Float airTemperature) {
+        this.airTemperature = airTemperature;
+    }
+
+    public void setWindSpeed(Float windSpeed) {
+        this.windSpeed = windSpeed;
+    }
+
+    public void setWeatherPhenomenon(String weatherPhenomenon) {
+        this.weatherPhenomenon = weatherPhenomenon;
+    }
+
+    @Override
+    public String toString() {
+        return "WeatherModel{" +
+                "id=" + id +
+                ", timeStamp=" + timeStamp +
+                ", name='" + name + '\'' +
+                ", wmo=" + wmo +
+                ", airTemperature=" + airTemperature +
+                ", windSpeed=" + windSpeed +
+                ", weatherPhenomenon='" + weatherPhenomenon + '\'' +
+                '}';
     }
 }
