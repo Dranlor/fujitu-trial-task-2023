@@ -1,5 +1,7 @@
 package com.fujitsutask.deliveryapp.controller;
 
+import com.fujitsutask.deliveryapp.repository.WeatherRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,6 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class DeliveryRestController {
+
+    private final WeatherRepository repository;
+
+    @Autowired
+    public DeliveryRestController(WeatherRepository repository) {
+        this.repository = repository;
+    }
 
     /**
      * Endpoint for requesting the delivery fee.
@@ -21,7 +30,8 @@ public class DeliveryRestController {
     @GetMapping("/cities/{city_id}/vehicles/{vehicle_id}")
     public String getDeliveryFee(@PathVariable("city_id") Integer cityId,
                                  @PathVariable("vehicle_id") Integer vehicleId) {
-        return String.format("You made request to\nCityID: %s,\nVehicleID: %s", cityId, vehicleId);
+
+        return repository.findAll().toString();
     }
 
 }
