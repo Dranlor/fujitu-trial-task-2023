@@ -2,15 +2,17 @@ package com.fujitsutask.deliveryapp.service;
 
 import com.fujitsutask.deliveryapp.httpclient.HttpClientInstance;
 import okhttp3.OkHttpClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class WeatherDataRequestService {
+public class WeatherDataService {
 
     private final OkHttpClient httpClient;
 
-    public WeatherDataRequestService() {
-        httpClient = HttpClientInstance.getInstance();
+    @Autowired
+    public WeatherDataService(OkHttpClient client) {
+        httpClient = client;
     }
 
 
