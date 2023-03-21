@@ -1,8 +1,9 @@
-package com.fujitsutask.deliveryapp.repository;
+package com.fujitsutask.deliveryapp.weather.repository;
 
-import com.fujitsutask.deliveryapp.model.WeatherModel;
+import com.fujitsutask.deliveryapp.weather.model.WeatherModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
 
 @Repository
 public interface WeatherRepository extends JpaRepository<WeatherModel, Long> {

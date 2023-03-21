@@ -1,4 +1,4 @@
-package com.fujitsutask.deliveryapp.data;
+package com.fujitsutask.deliveryapp.app.data;
 
 import java.math.BigDecimal;
 

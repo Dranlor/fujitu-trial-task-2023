@@ -1,7 +1,10 @@
-package com.fujitsutask.deliveryapp.controller;
+package com.fujitsutask.deliveryapp.app.controller;
 
-import com.fujitsutask.deliveryapp.model.WeatherModel;
-import com.fujitsutask.deliveryapp.repository.WeatherRepository;
+import com.fujitsutask.deliveryapp.weather.dto.ObservationsDto;
+import com.fujitsutask.deliveryapp.weather.dto.StationDto;
+import com.fujitsutask.deliveryapp.weather.model.WeatherModel;
+import com.fujitsutask.deliveryapp.weather.repository.WeatherRepository;
+import com.fujitsutask.deliveryapp.weather.service.WeatherDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,13 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
  * Main controller class for handling incoming REST interface requests.
  */
 @RestController
-public class DeliveryRestController {
+public class DeliveryFeeController {
 
     private final JpaRepository<WeatherModel, Long> weatherRepository;
+    private final WeatherDataService weatherDataService;
 
     @Autowired
-    public DeliveryRestController(WeatherRepository weatherRepository) {
+    public DeliveryFeeController(WeatherRepository weatherRepository, WeatherDataService weatherDataService) {
         this.weatherRepository = weatherRepository;
+        this.weatherDataService = weatherDataService;
     }
 
     /**
@@ -33,6 +38,17 @@ public class DeliveryRestController {
     public String getDeliveryFee(@PathVariable("wmo_code") Integer wmoCode,
                                  @PathVariable("vehicle_id") Integer vehicleId) {
         return weatherRepository.findAll().toString();
+    }
+
+    @GetMapping("/weather")
+    public String getWeather() {
+        ObservationsDto dto = weatherDataService.requestLatestWeatherInfo();
+        var dtolist = dto.getStations().stream()
+                .filter(station -> station.getName().contains("Tallinn") || station.getName().contains("Tartu")
+                || station.getName().contains("Pärnu"))
+                .map(StationDto::toString).reduce("", String::concat);
+
+        return dtolist;
     }
 
 }
