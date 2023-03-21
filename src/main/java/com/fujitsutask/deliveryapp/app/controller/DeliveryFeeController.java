@@ -42,7 +42,7 @@ public class DeliveryFeeController {
 
     @GetMapping("api/v1/delivery/cities")
     public String getCities() {
-
+        return "";
     }
 
 
