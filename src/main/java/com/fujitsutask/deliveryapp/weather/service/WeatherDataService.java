@@ -47,7 +47,7 @@ public class WeatherDataService {
             if (response.body() != null) {
                 InputStream responseBodyStream = response.body().byteStream();
                 observations = xmlMapper.readValue(responseBodyStream, ObservationsDto.class);
-
+                // TODO: Filter to only get required weather stations.
             }
         } catch (IOException e) {
             throw new WeatherServiceException("IOException: Could not execute request.", e);
