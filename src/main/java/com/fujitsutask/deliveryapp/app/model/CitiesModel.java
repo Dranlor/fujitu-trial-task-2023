@@ -70,4 +70,16 @@ public class CitiesModel {
     public void setBaseFeeBike(BigDecimal baseFeeBike) {
         this.baseFeeBike = baseFeeBike;
     }
+
+    @Override
+    public String toString() {
+        return "CitiesModel{" +
+                "id=" + id +
+                ", cityName='" + cityName + '\'' +
+                ", weatherStationWmo=" + weatherStationWmo +
+                ", baseFeeCar=" + baseFeeCar +
+                ", baseFeeScooter=" + baseFeeScooter +
+                ", baseFeeBike=" + baseFeeBike +
+                '}';
+    }
 }

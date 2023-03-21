@@ -1,5 +1,6 @@
 package com.fujitsutask.deliveryapp.app.controller;
 
+import com.fujitsutask.deliveryapp.app.model.CitiesModel;
 import com.fujitsutask.deliveryapp.weather.dto.ObservationsDto;
 import com.fujitsutask.deliveryapp.weather.dto.StationDto;
 import com.fujitsutask.deliveryapp.weather.model.WeatherModel;
@@ -18,11 +19,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class DeliveryFeeController {
 
     private final JpaRepository<WeatherModel, Long> weatherRepository;
+    private final JpaRepository<CitiesModel, Long> citiesRepository;
     private final WeatherDataService weatherDataService;
 
     @Autowired
-    public DeliveryFeeController(WeatherRepository weatherRepository, WeatherDataService weatherDataService) {
+    public DeliveryFeeController(WeatherRepository weatherRepository, JpaRepository<CitiesModel, Long> citiesRepository,
+                                 WeatherDataService weatherDataService) {
         this.weatherRepository = weatherRepository;
+        this.citiesRepository = citiesRepository;
         this.weatherDataService = weatherDataService;
     }
 
@@ -42,7 +46,7 @@ public class DeliveryFeeController {
 
     @GetMapping("api/v1/delivery/cities")
     public String getCities() {
-        return "";
+        return citiesRepository.findAll().toString();
     }
 
 
