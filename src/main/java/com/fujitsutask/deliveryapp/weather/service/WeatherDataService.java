@@ -30,6 +30,8 @@ public class WeatherDataService {
 
     /**
      * Request the latest weather information from the given endpoint.
+     *
+     * @return A DTO object representing the received XML.
      */
     public ObservationsDto requestLatestWeatherInfo() {
         ObservationsDto observations = null;
@@ -53,6 +55,13 @@ public class WeatherDataService {
             throw new WeatherServiceException("IllegalStateException: The request has been executed before.", e);
         }
         return observations;
+    }
+
+    /**
+     * Save the given weather observations into the database.
+     */
+    public void saveWeatherData(ObservationsDto observations) {
+
     }
 
     // weatherCronJob.java

@@ -10,16 +10,16 @@ public class StationDto {
     private String name;
 
 
-    private String wmocode;
+    private Integer wmocode;
 
 
     private String phenomenon;
 
 
-    private double airtemperature;
+    private Float airtemperature;
 
 
-    private double windspeed;
+    private Float windspeed;
 
 
     public StationDto() {
@@ -34,12 +34,12 @@ public class StationDto {
         this.name = name;
     }
 
-    public String getWmocode() {
+    public Integer getWmocode() {
         return wmocode;
     }
 
     @JacksonXmlProperty(localName = "wmocode")
-    public void setWmocode(String wmocode) {
+    public void setWmocode(Integer wmocode) {
         this.wmocode = wmocode;
     }
 
@@ -52,21 +52,21 @@ public class StationDto {
         this.phenomenon = phenomenon;
     }
 
-    public double getAirtemperature() {
+    public Float getAirtemperature() {
         return airtemperature;
     }
 
     @JacksonXmlProperty(localName = "airtemperature")
-    public void setAirtemperature(double airtemperature) {
+    public void setAirtemperature(Float airtemperature) {
         this.airtemperature = airtemperature;
     }
 
-    public double getWindspeed() {
+    public Float getWindspeed() {
         return windspeed;
     }
 
     @JacksonXmlProperty(localName = "windspeed")
-    public void setWindspeed(double windspeed) {
+    public void setWindspeed(Float windspeed) {
         this.windspeed = windspeed;
     }
 

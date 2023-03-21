@@ -30,17 +30,17 @@ public class DeliveryFeeController {
      * Endpoint for requesting the delivery fee.
      * <p/>
      * The delivery fee is calculated based on the given {@code wmoCode} and {@code vehicleId} path variables.
-     * @param wmoCode The WMO code of the weather station.
+     * @param cityId The WMO code of the weather station.
      * @param vehicleId ID of the vehicle used in the delivery.
      * @return The delivery fee for the requested city using the requested vehicle.
      */
-    @GetMapping("/cities/{wmo_code}/vehicles/{vehicle_id}")
-    public String getDeliveryFee(@PathVariable("wmo_code") Integer wmoCode,
+    @GetMapping("api/v1/delivery/cities/{city_id}/vehicles/{vehicle_id}")
+    public String getDeliveryFee(@PathVariable("city_id") Integer cityId,
                                  @PathVariable("vehicle_id") Integer vehicleId) {
         return weatherRepository.findAll().toString();
     }
 
-    @GetMapping("/weather")
+    @GetMapping("api/v1/weather")
     public String getWeather() {
         ObservationsDto dto = weatherDataService.requestLatestWeatherInfo();
         var dtolist = dto.getStations().stream()
