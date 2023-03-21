@@ -950,3 +950,6 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: /home/allan/Idea
 	at org.h2.mvstore.FileStore.open(FileStore.java:128)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:452)
 	... 53 more
+2023-03-21 23:23:50 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table[*]"; expected "identifier"; SQL statement:
+alter table [42001-210]

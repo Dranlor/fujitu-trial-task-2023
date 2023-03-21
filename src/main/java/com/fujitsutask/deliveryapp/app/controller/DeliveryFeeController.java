@@ -40,6 +40,12 @@ public class DeliveryFeeController {
         return weatherRepository.findAll().toString();
     }
 
+    @GetMapping("api/v1/delivery/cities")
+    public String getCities() {
+
+    }
+
+
     @GetMapping("api/v1/weather")
     public String getWeather() {
         ObservationsDto dto = weatherDataService.requestLatestWeatherInfo();
