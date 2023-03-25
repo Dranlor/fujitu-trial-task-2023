@@ -9,11 +9,12 @@ import com.fujitsutask.deliveryapp.weather.model.WeatherModel;
 public class WeatherMapper {
 
     /**
-     * Map data object to database entity.
+     * Map a weather station DTO to a WeatherModel.
      * @return New database entity.
      */
-    public WeatherModel mapToModel(StationDto dto) {
+    public WeatherModel mapToEntity(StationDto dto) {
         WeatherModel model = new WeatherModel();
+
         model.setName(dto.getName());
         model.setWeatherPhenomenon(dto.getPhenomenon());
         model.setWmo(dto.getWmocode());
@@ -21,5 +22,22 @@ public class WeatherMapper {
         model.setAirTemperature(dto.getAirtemperature());
 
         return model;
+    }
+
+    /**
+     * Map from WeatherModel to a Station DTO.
+     * @param model WeatherModel
+     * @return StationDto
+     */
+    public StationDto mapFromEntity(WeatherModel model) {
+        StationDto stationDto = new StationDto();
+
+        stationDto.setName(model.getName());
+        stationDto.setAirtemperature(model.getAirTemperature());
+        stationDto.setPhenomenon(model.getWeatherPhenomenon());
+        stationDto.setWindspeed(model.getWindSpeed());
+        stationDto.setWmocode(model.getWmo());
+
+        return stationDto;
     }
 }
