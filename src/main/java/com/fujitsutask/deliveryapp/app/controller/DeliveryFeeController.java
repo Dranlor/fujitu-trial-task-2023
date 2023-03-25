@@ -1,8 +1,8 @@
 package com.fujitsutask.deliveryapp.app.controller;
 
 import com.fujitsutask.deliveryapp.app.model.CityModel;
-import com.fujitsutask.deliveryapp.weather.dto.ObservationsDto;
-import com.fujitsutask.deliveryapp.weather.dto.StationDto;
+import com.fujitsutask.deliveryapp.weather.domain.Observations;
+import com.fujitsutask.deliveryapp.weather.domain.Station;
 import com.fujitsutask.deliveryapp.weather.mapper.WeatherMapper;
 import com.fujitsutask.deliveryapp.weather.model.WeatherModel;
 import com.fujitsutask.deliveryapp.weather.repository.WeatherRepository;
@@ -57,27 +57,23 @@ public class DeliveryFeeController {
 
     @GetMapping("api/v1/weather")
     public String getWeather() {
-        ObservationsDto observationsDto = weatherDataService.requestLatestWeatherInfo();
+        Observations observations = weatherDataService.requestLatestWeatherInfo();
         List<CityModel> allCities = citiesRepository.findAll();
 
-        ObservationsDto newDto = new ObservationsDto();
-        newDto.setTimestamp(observationsDto.getTimestamp());
+        Observations newDto = new Observations();
+        newDto.setTimestamp(observations.getTimestamp());
 
-        List<StationDto> filteredStations = new ArrayList<>();
+        List<Station> filteredStations = new ArrayList<>();
         for (CityModel cityModel : allCities) {
-            StationDto cityObservation = observationsDto.getStations().stream()
+            Station cityObservation = observations.getStations().stream()
                     .filter(station -> Objects.equals(station.getWmocode(), cityModel.getWeatherStationWmo()))
                     .findFirst().orElseThrow();
             filteredStations.add(cityObservation);
-
-            WeatherModel model = WeatherMapper.mapToEntity(cityObservation);
-            model.setTimeStamp(newDto.getTimestamp());
-
-            weatherRepository.save(model);
         }
-
-
         newDto.setStations(filteredStations);
+
+        weatherRepository.saveAll(WeatherMapper.mapObservationsToModels(newDto));
+
         return newDto.toString();
 
 

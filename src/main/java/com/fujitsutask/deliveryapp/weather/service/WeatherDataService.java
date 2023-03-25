@@ -1,7 +1,7 @@
 package com.fujitsutask.deliveryapp.weather.service;
 
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.fujitsutask.deliveryapp.weather.dto.ObservationsDto;
+import com.fujitsutask.deliveryapp.weather.domain.Observations;
 import com.fujitsutask.deliveryapp.weather.exception.WeatherServiceException;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -33,8 +33,8 @@ public class WeatherDataService {
      *
      * @return A DTO object representing the received XML.
      */
-    public ObservationsDto requestLatestWeatherInfo() {
-        ObservationsDto observations = null;
+    public Observations requestLatestWeatherInfo() {
+        Observations observations = null;
 
         Request.Builder builder = new Request.Builder();
         Request request = builder.addHeader("Accept", "application/xml")
@@ -46,7 +46,7 @@ public class WeatherDataService {
 
             if (response.body() != null) {
                 InputStream responseBodyStream = response.body().byteStream();
-                observations = xmlMapper.readValue(responseBodyStream, ObservationsDto.class);
+                observations = xmlMapper.readValue(responseBodyStream, Observations.class);
                 // TODO: Filter to only get required weather stations.
             }
         } catch (IOException e) {
@@ -60,7 +60,7 @@ public class WeatherDataService {
     /**
      * Save the given weather observations into the database.
      */
-    public void saveWeatherData(ObservationsDto observations) {
+    public void saveWeatherData(Observations observations) {
 
     }
 

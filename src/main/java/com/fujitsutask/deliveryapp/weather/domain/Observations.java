@@ -1,4 +1,4 @@
-package com.fujitsutask.deliveryapp.weather.dto;
+package com.fujitsutask.deliveryapp.weather.domain;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
@@ -10,12 +10,12 @@ import java.util.List;
 
 @Data
 @JacksonXmlRootElement(localName = "observations")
-public class ObservationsDto {
+public class Observations {
 
     @JacksonXmlProperty(isAttribute = true)
     private Long timestamp;
     @JacksonXmlElementWrapper(useWrapping = false)
     @JacksonXmlProperty(localName = "station")
-    private List<StationDto> stations;
+    private List<Station> stations;
 }
 

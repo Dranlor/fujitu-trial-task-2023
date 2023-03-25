@@ -1,4 +1,4 @@
-package com.fujitsutask.deliveryapp.weather.dto;
+package com.fujitsutask.deliveryapp.weather.domain;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @JacksonXmlRootElement(localName = "station")
-public class StationDto {
+public class Station {
 
     @JacksonXmlProperty(localName = "name")
     private String name;
