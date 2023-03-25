@@ -61,7 +61,22 @@ public class DeliveryFeeService {
                 break;
 
             case "Bike":
+                try {
+                    final BigDecimal airTempExtraFee = getAirTempExtraFee(weatherData.getAirTemperature(), vehicle);
+                    final BigDecimal weatherPhenomenonExtraFee = getWeatherPhenomenonExtraFee(
+                            weatherData.getWeatherPhenomenon(), vehicle);
+                    final BigDecimal windSpeedExtraFee = getWindSpeedExtraFee(weatherData.getWindSpeed(), vehicle);
 
+                    totalPrice = totalPrice.add(airTempExtraFee);
+                    totalPrice = totalPrice.add(weatherPhenomenonExtraFee);
+                    totalPrice = totalPrice.add(windSpeedExtraFee);
+
+                } catch (DeliveryFeeException e) {
+                    resultDto.setError(e);
+                    break;
+                }
+
+                resultDto.setTotalPrice(totalPrice);
                 break;
 
             default:
