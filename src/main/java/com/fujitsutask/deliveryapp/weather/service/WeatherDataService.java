@@ -60,7 +60,7 @@ public class WeatherDataService {
                 observations = xmlMapper.readValue(responseBodyStream, Observations.class); // Map XML to Observations.
                 observationsFromFilter.setTimestamp(observations.getTimestamp());
 
-                // Filter the stations in Observations to get only the weather stations in the cities database table.
+                // Filter the stations in Observations to get only the weather stations for the cities in the database.
                 for (CityModel city : allCities) {
                     List<Station> stations =  observations.getStations().stream()
                             .filter(station -> Objects.equals(station.getWmocode(), city.getWeatherStationWmo()))
