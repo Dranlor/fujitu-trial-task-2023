@@ -1,8 +1,9 @@
 package com.fujitsutask.deliveryapp.app.controller;
 
-import com.fujitsutask.deliveryapp.app.model.CitiesModel;
+import com.fujitsutask.deliveryapp.app.model.CityModel;
 import com.fujitsutask.deliveryapp.weather.dto.ObservationsDto;
 import com.fujitsutask.deliveryapp.weather.dto.StationDto;
+import com.fujitsutask.deliveryapp.weather.mapper.WeatherMapper;
 import com.fujitsutask.deliveryapp.weather.model.WeatherModel;
 import com.fujitsutask.deliveryapp.weather.repository.WeatherRepository;
 import com.fujitsutask.deliveryapp.weather.service.WeatherDataService;
@@ -23,11 +24,11 @@ import java.util.Objects;
 public class DeliveryFeeController {
 
     private final JpaRepository<WeatherModel, Long> weatherRepository;
-    private final JpaRepository<CitiesModel, Long> citiesRepository;
+    private final JpaRepository<CityModel, Long> citiesRepository;
     private final WeatherDataService weatherDataService;
 
     @Autowired
-    public DeliveryFeeController(WeatherRepository weatherRepository, JpaRepository<CitiesModel, Long> citiesRepository,
+    public DeliveryFeeController(WeatherRepository weatherRepository, JpaRepository<CityModel, Long> citiesRepository,
                                  WeatherDataService weatherDataService) {
         this.weatherRepository = weatherRepository;
         this.citiesRepository = citiesRepository;
@@ -57,18 +58,24 @@ public class DeliveryFeeController {
     @GetMapping("api/v1/weather")
     public String getWeather() {
         ObservationsDto observationsDto = weatherDataService.requestLatestWeatherInfo();
-        List<CitiesModel> allCities = citiesRepository.findAll();
+        List<CityModel> allCities = citiesRepository.findAll();
 
         ObservationsDto newDto = new ObservationsDto();
         newDto.setTimestamp(observationsDto.getTimestamp());
 
         List<StationDto> filteredStations = new ArrayList<>();
-        for (CitiesModel cityModel : allCities) {
+        for (CityModel cityModel : allCities) {
             StationDto cityObservation = observationsDto.getStations().stream()
                     .filter(station -> Objects.equals(station.getWmocode(), cityModel.getWeatherStationWmo()))
                     .findFirst().orElseThrow();
             filteredStations.add(cityObservation);
+
+            WeatherModel model = WeatherMapper.mapToEntity(cityObservation);
+            model.setTimeStamp(newDto.getTimestamp());
+
+            weatherRepository.save(model);
         }
+
 
         newDto.setStations(filteredStations);
         return newDto.toString();

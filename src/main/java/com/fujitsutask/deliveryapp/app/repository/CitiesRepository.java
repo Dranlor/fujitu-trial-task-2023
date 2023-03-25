@@ -1,6 +1,6 @@
 package com.fujitsutask.deliveryapp.app.repository;
 
-import com.fujitsutask.deliveryapp.app.model.CitiesModel;
+import com.fujitsutask.deliveryapp.app.model.CityModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +11,6 @@ import org.springframework.stereotype.Repository;
  * corresponds to each city.
  */
 @Repository
-public interface CitiesRepository extends JpaRepository<CitiesModel, Long> {
-    CitiesModel findByWeatherStationWmo(Integer wmo);
+public interface CitiesRepository extends JpaRepository<CityModel, Long> {
+    CityModel findByWeatherStationWmo(Integer wmo);
 }
