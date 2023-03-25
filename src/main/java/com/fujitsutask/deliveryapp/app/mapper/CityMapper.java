@@ -1,4 +1,4 @@
-package com.fujitsutask.deliveryapp.mapper;
+package com.fujitsutask.deliveryapp.app.mapper;
 
 import com.fujitsutask.deliveryapp.app.dto.CityDto;
 import com.fujitsutask.deliveryapp.app.model.CityModel;

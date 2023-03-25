@@ -50,11 +50,11 @@ public class DeliveryFeeService {
                     final BigDecimal weatherPhenomenonExtraFee = getWeatherPhenomenonExtraFee(
                             weatherData.getWeatherPhenomenon(), vehicle);
 
+                    totalPrice = totalPrice.add(city.getBaseFeeScooter());
                     totalPrice = totalPrice.add(airTempExtraFee);
                     totalPrice = totalPrice.add(weatherPhenomenonExtraFee);
-
                 } catch (DeliveryFeeException e) {
-                    resultDto.setError(e);
+                    resultDto.setError(e.getMessage());
                     break;
                 }
                 resultDto.setTotalPrice(totalPrice);
@@ -67,12 +67,17 @@ public class DeliveryFeeService {
                             weatherData.getWeatherPhenomenon(), vehicle);
                     final BigDecimal windSpeedExtraFee = getWindSpeedExtraFee(weatherData.getWindSpeed(), vehicle);
 
+                    totalPrice = totalPrice.add(city.getBaseFeeBike());
+                    System.out.println("BASEFEE " + city.getBaseFeeBike());
                     totalPrice = totalPrice.add(airTempExtraFee);
+                    System.out.println("AIRTEMP " + airTempExtraFee);
                     totalPrice = totalPrice.add(weatherPhenomenonExtraFee);
+                    System.out.println("PHENOM " + weatherPhenomenonExtraFee);
                     totalPrice = totalPrice.add(windSpeedExtraFee);
-
+                    System.out.println("WIND " + windSpeedExtraFee);
+                    System.out.println("WINDSPEED " + weatherData.getWindSpeed());
                 } catch (DeliveryFeeException e) {
-                    resultDto.setError(e);
+                    resultDto.setError(e.getMessage());
                     break;
                 }
 
@@ -80,8 +85,7 @@ public class DeliveryFeeService {
                 break;
 
             default:
-                resultDto.setError(new DeliveryFeeException("Invalid vehicle type.",
-                        DeliveryFeeException.Reason.INVALID_VEHICLE_TYPE));
+                resultDto.setError("Invalid vehicle type.");
                 break;
         }
         return resultDto;

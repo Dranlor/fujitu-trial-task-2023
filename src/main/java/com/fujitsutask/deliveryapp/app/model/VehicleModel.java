@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 @Data
 @Entity
 @Table(name = "EXTRAFEES")
-public class VehicleExtraFeeModel {
+public class VehicleModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,4 +36,17 @@ public class VehicleExtraFeeModel {
 
     @Column(name = "WPEF_RAIN")
     private BigDecimal wpefRain;
+
+    @Override
+    public String toString() {
+        return "VehicleModel{" +
+                "id=" + id +
+                ", vehicleType='" + vehicleType + '\'' +
+                ", atefFreezing=" + atefFreezing +
+                ", atefModerate=" + atefModerate +
+                ", wsefModerate=" + wsefModerate +
+                ", wpefSnowSleet=" + wpefSnowSleet +
+                ", wpefRain=" + wpefRain +
+                '}';
+    }
 }
