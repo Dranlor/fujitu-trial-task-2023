@@ -953,3 +953,9 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: /home/allan/Idea
 2023-03-21 23:23:50 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table[*]"; expected "identifier"; SQL statement:
 alter table [42001-210]
+2023-03-25 08:57:20 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table WEATHERINFO[*]"; expected "., ADD, SET, RENAME, DROP, ALTER"; SQL statement:
+alter table WEATHERINFO [42001-210]
+2023-03-25 08:57:43 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "DATE '2023-03-19' (WEATHERINFO_COPY_3_0: ""TIMESTAMP"" BIGINT NOT NULL)"; SQL statement:
+INSERT INTO "PUBLIC"."WEATHERINFO_COPY_3_0"("ID", "TIMESTAMP", "STATIONNAME", "WMO", "AIRTEMPERATURE", "WINDSPEED", "WEATHERPHENOMENON") OVERRIDING SYSTEM VALUE SELECT "ID", "TIMESTAMP", "STATIONNAME", "WMO", "AIRTEMPERATURE", "WINDSPEED", "WEATHERPHENOMENON" FROM "PUBLIC"."WEATHERINFO" [22018-210]

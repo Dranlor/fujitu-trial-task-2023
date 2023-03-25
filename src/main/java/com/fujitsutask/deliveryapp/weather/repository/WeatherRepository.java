@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface WeatherRepository extends JpaRepository<WeatherModel, Long> {
     /**
-     * Find the latest database entry for given weather station.
+     * Find the latest database entry for given weather station based on the station's wmo code.
      * @param wmo WMO number of the weather station.
      * @return Model object with the latest weather information.
      */
