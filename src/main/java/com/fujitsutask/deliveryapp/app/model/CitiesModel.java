@@ -1,10 +1,17 @@
 package com.fujitsutask.deliveryapp.app.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.GenerationType;
+import lombok.Data;
 
 import java.math.BigDecimal;
 
 @Entity
+@Data
 @Table(name = "CITIES")
 public class CitiesModel {
 
@@ -26,60 +33,4 @@ public class CitiesModel {
 
     @Column(name = "BASEFEEBIKE")
     private BigDecimal baseFeeBike;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public String getCityName() {
-        return cityName;
-    }
-
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
-    }
-
-    public Integer getWeatherStationWmo() {
-        return weatherStationWmo;
-    }
-
-    public void setWeatherStationWmo(Integer weatherStationWmo) {
-        this.weatherStationWmo = weatherStationWmo;
-    }
-
-    public BigDecimal getBaseFeeCar() {
-        return baseFeeCar;
-    }
-
-    public void setBaseFeeCar(BigDecimal baseFeeCar) {
-        this.baseFeeCar = baseFeeCar;
-    }
-
-    public BigDecimal getBaseFeeScooter() {
-        return baseFeeScooter;
-    }
-
-    public void setBaseFeeScooter(BigDecimal baseFeeScooter) {
-        this.baseFeeScooter = baseFeeScooter;
-    }
-
-    public BigDecimal getBaseFeeBike() {
-        return baseFeeBike;
-    }
-
-    public void setBaseFeeBike(BigDecimal baseFeeBike) {
-        this.baseFeeBike = baseFeeBike;
-    }
-
-    @Override
-    public String toString() {
-        return "CitiesModel{" +
-                "id=" + id +
-                ", cityName='" + cityName + '\'' +
-                ", weatherStationWmo=" + weatherStationWmo +
-                ", baseFeeCar=" + baseFeeCar +
-                ", baseFeeScooter=" + baseFeeScooter +
-                ", baseFeeBike=" + baseFeeBike +
-                '}';
-    }
 }

@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 /**
  * Main controller class for handling incoming REST interface requests.
  */
@@ -52,13 +56,25 @@ public class DeliveryFeeController {
 
     @GetMapping("api/v1/weather")
     public String getWeather() {
-        ObservationsDto dto = weatherDataService.requestLatestWeatherInfo();
-        var dtolist = dto.getStations().stream()
-                .filter(station -> station.getName().contains("Tallinn") || station.getName().contains("Tartu")
-                || station.getName().contains("Pärnu"))
-                .map(StationDto::toString).reduce("", String::concat);
+        ObservationsDto observationsDto = weatherDataService.requestLatestWeatherInfo();
+        List<CitiesModel> allCities = citiesRepository.findAll();
 
-        return dtolist;
+        ObservationsDto newDto = new ObservationsDto();
+        newDto.setTimestamp(observationsDto.getTimestamp());
+
+        List<StationDto> filteredStations = new ArrayList<>();
+        for (CitiesModel cityModel : allCities) {
+            StationDto cityObservation = observationsDto.getStations().stream()
+                    .filter(station -> Objects.equals(station.getWmocode(), cityModel.getWeatherStationWmo()))
+                    .findFirst().orElseThrow();
+            filteredStations.add(cityObservation);
+        }
+
+        newDto.setStations(filteredStations);
+        return newDto.toString();
+
+
+
     }
 
 }
