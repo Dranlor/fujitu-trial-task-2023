@@ -16,25 +16,21 @@ import java.math.BigDecimal;
 @Service
 public class DeliveryFeeService {
 
+    /**
+     * Calculates the total delivery fee based on the given city, vehicle type and weather conditions.
+     * @param city City DTO.
+     * @param vehicle Vehicle DTO.
+     * @param weatherData Weather DTO.
+     * @return DeliveryFee DTO with the total delivery fee or an error message if the fee can't be calculated.
+     */
     public DeliveryFeeDto calculateDeliveryFee(CityDto city, VehicleDto vehicle, WeatherDto weatherData) {
-        /*
-         * Vehicle type: Scooter, Bike
-         *   air temp. = <-10C -> AETF = 1
-         *   air temp. = -10C -- 0C -> AETF = 0.5
-         *
-         * Vehicle type: Bike
-         *   wind speed = 10 - 20 -> WSEF 0.5
-         *   wind speed = >20 -> ERR
-         *
-         * Vehicle type: Scooter, Bike
-         *   phenom. = snow, sleet -> WPEF 1
-         *   phenom. = rain -> WPEF 0.5
-         *   phenom. = hail, glaze, thunder -> ERR
-         */
-
         DeliveryFeeDto resultDto = new DeliveryFeeDto();
+        if (city.getCityName() == null) {
+            throw new DeliveryFeeException("Invalid city ID.", DeliveryFeeException.Reason.INVALID_CITY_ID);
+        }
         resultDto.setCityName(city.getCityName());
         resultDto.setVehicleType(vehicle.getVehicleType());
+        resultDto.setWeatherDataTimestamp(weatherData.getTimeStamp());
 
         BigDecimal totalPrice = new BigDecimal(0);
 
@@ -68,14 +64,9 @@ public class DeliveryFeeService {
                     final BigDecimal windSpeedExtraFee = getWindSpeedExtraFee(weatherData.getWindSpeed(), vehicle);
 
                     totalPrice = totalPrice.add(city.getBaseFeeBike());
-                    System.out.println("BASEFEE " + city.getBaseFeeBike());
                     totalPrice = totalPrice.add(airTempExtraFee);
-                    System.out.println("AIRTEMP " + airTempExtraFee);
                     totalPrice = totalPrice.add(weatherPhenomenonExtraFee);
-                    System.out.println("PHENOM " + weatherPhenomenonExtraFee);
                     totalPrice = totalPrice.add(windSpeedExtraFee);
-                    System.out.println("WIND " + windSpeedExtraFee);
-                    System.out.println("WINDSPEED " + weatherData.getWindSpeed());
                 } catch (DeliveryFeeException e) {
                     resultDto.setError(e.getMessage());
                     break;
@@ -85,8 +76,7 @@ public class DeliveryFeeService {
                 break;
 
             default:
-                resultDto.setError("Invalid vehicle type.");
-                break;
+                throw new DeliveryFeeException("Invalid vehicle ID.", DeliveryFeeException.Reason.INVALID_VEHICLE_ID);
         }
         return resultDto;
     }

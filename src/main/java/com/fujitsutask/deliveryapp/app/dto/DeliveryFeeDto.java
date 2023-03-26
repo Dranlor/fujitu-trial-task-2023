@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 
 @Data
 public class DeliveryFeeDto {
+    Long weatherDataTimestamp;
     String cityName;
     String vehicleType;
     BigDecimal totalPrice;

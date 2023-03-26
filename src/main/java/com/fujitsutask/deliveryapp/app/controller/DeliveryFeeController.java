@@ -59,14 +59,12 @@ public class DeliveryFeeController {
                                                  @PathVariable("vehicle_id") Long vehicleId) {
         DeliveryFeeDto outputDto = new DeliveryFeeDto();
         try {
-            VehicleModel vehicleModel = vehicleRepository.findById(vehicleId).orElseThrow(
-                    () -> new DeliveryFeeException("Invalid vehicle ID.", DeliveryFeeException.Reason.INVALID_VEHICLE_ID)
-            );
-
             CityModel cityModel = citiesRepository.findById(cityId).orElseThrow(
                     () -> new DeliveryFeeException("Invalid city ID.", DeliveryFeeException.Reason.INVALID_CITY_ID)
             );
-
+            VehicleModel vehicleModel = vehicleRepository.findById(vehicleId).orElseThrow(
+                    () -> new DeliveryFeeException("Invalid vehicle ID.", DeliveryFeeException.Reason.INVALID_VEHICLE_ID)
+            );
             WeatherModel weatherModel = weatherRepository.findDistinctTopByWmoOrderByTimeStampDesc(cityModel.getWeatherStationWmo())
                     .orElseThrow(
                             () -> new DeliveryFeeException("No valid weather entry for given city.", DeliveryFeeException.Reason.NO_WEATHER_ENTRY)
