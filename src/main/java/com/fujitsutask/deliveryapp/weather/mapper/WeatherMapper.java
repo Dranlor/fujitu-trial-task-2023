@@ -9,9 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Mapper used to map weather information info a database entity.
+ * Mapper used to map weather information.
  */
 public class WeatherMapper {
+    /**
+     * Maps WeatherModel fields to a WeatherDto.
+     * @param model WeatherModel
+     * @return WeatherDto with mapped information.
+     */
     public static WeatherDto toDto(WeatherModel model) {
         WeatherDto dto = new WeatherDto();
         dto.setId(model.getId());
@@ -24,6 +29,11 @@ public class WeatherMapper {
         return dto;
     }
 
+    /**
+     * Maps WeatherDto fields to a WeatherModel.
+     * @param dto WeatherDto
+     * @return WeatherModel with mapped information.
+     */
     public static WeatherModel fromDto(WeatherDto dto) {
         WeatherModel model = new WeatherModel();
         model.setId(dto.getId());
@@ -36,6 +46,11 @@ public class WeatherMapper {
         return model;
     }
 
+    /**
+     * Maps the given Station object to a WeatherModel.
+     * @param station Station object.
+     * @return WeatherModel.
+     */
     private static WeatherModel mapStationToModel(Station station) {
         WeatherModel model = new WeatherModel();
 
@@ -50,6 +65,8 @@ public class WeatherMapper {
 
     /**
      * Given an Observations object, map it to a list of WeatherModels.
+     * <p/>
+     * Uses {@link WeatherMapper#mapStationToModel(Station)} to map individual Station objects.
      * @param observations Observations object.
      * @return List of WeatherModel objects.
      */

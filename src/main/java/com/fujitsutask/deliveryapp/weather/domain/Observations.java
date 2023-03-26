@@ -8,6 +8,10 @@ import lombok.Data;
 
 import java.util.List;
 
+/**
+ * Data model that describes the layout of the top-level xml element that is received through
+ * the HTTP request to ilmateenistus.ee
+ */
 @Data
 @JacksonXmlRootElement(localName = "observations")
 public class Observations {

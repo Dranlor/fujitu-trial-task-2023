@@ -4,6 +4,9 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import lombok.Data;
 
+/**
+ * Data model that describes the station XML elements inside observations gotten from ilmateenistus.ee.
+ */
 @Data
 @JacksonXmlRootElement(localName = "station")
 public class Station {
