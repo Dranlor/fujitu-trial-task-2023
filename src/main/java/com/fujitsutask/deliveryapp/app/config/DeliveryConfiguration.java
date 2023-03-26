@@ -1,7 +1,6 @@
 package com.fujitsutask.deliveryapp.app.config;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import okhttp3.OkHttpClient;
 import org.springframework.context.annotation.Bean;

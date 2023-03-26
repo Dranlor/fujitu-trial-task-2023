@@ -3,6 +3,7 @@ package com.fujitsutask.deliveryapp.app.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fujitsutask.deliveryapp.app.dto.DeliveryFeeDto;
+import com.fujitsutask.deliveryapp.app.dto.VehicleDto;
 import com.fujitsutask.deliveryapp.app.exception.DeliveryFeeException;
 import com.fujitsutask.deliveryapp.app.model.CityModel;
 import com.fujitsutask.deliveryapp.app.model.VehicleModel;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import lombok.AllArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -54,7 +56,6 @@ public class DeliveryFeeController {
      * @return The delivery fee for the requested city using the requested vehicle.
      */
     @GetMapping("api/v1/delivery/cities/{city_id}/vehicles/{vehicle_id}")
-    @ResponseBody
     public ResponseEntity<String> getDeliveryFee(@PathVariable("city_id") Long cityId,
                                                  @PathVariable("vehicle_id") Long vehicleId) {
         DeliveryFeeDto outputDto = new DeliveryFeeDto();
@@ -98,6 +99,25 @@ public class DeliveryFeeController {
         }
     }
 
+    /**
+     * Return all the available vehicle types with extra fees pricing list per vehicle type.
+     * @return Response entity with JSON encoded string.
+     */
+    @GetMapping("api/v1/delivery/vehicles")
+    public ResponseEntity<String> getVehiclesForCity() {
+        List<VehicleModel> vehiclesList = vehicleRepository.findAll();
+        List<VehicleDto> vehicleDtos = new ArrayList<>();
+        try {
+            for (VehicleModel model: vehiclesList) {
+                VehicleDto vehicleDto = VehicleMapper.toDto(model);
+                vehicleDtos.add(vehicleDto);
+            }
+
+            return getJsonResponseEntity(jsonMapper.writeValueAsString(vehicleDtos), HttpStatus.OK);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @GetMapping("api/v1/weather")
     public ResponseEntity<String> getWeather() {

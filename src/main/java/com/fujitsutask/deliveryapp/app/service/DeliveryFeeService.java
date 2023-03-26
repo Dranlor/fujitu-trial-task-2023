@@ -4,7 +4,6 @@ import com.fujitsutask.deliveryapp.app.dto.CityDto;
 import com.fujitsutask.deliveryapp.app.dto.DeliveryFeeDto;
 import com.fujitsutask.deliveryapp.app.dto.VehicleDto;
 import com.fujitsutask.deliveryapp.app.exception.DeliveryFeeException;
-import com.fujitsutask.deliveryapp.weather.domain.Observations;
 import com.fujitsutask.deliveryapp.weather.dto.WeatherDto;
 import org.springframework.stereotype.Service;
 
