@@ -18,6 +18,7 @@ import com.fujitsutask.deliveryapp.weather.model.WeatherModel;
 import com.fujitsutask.deliveryapp.weather.repository.WeatherRepository;
 import com.fujitsutask.deliveryapp.weather.service.WeatherDataService;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,9 +27,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import lombok.AllArgsConstructor;
+import org.springframework.web.method.HandlerMethod;
+import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 
 /**
@@ -41,8 +47,6 @@ public class DeliveryFeeController {
     private final WeatherRepository weatherRepository;
     private final CitiesRepository citiesRepository;
     private final VehicleRepository vehicleRepository;
-
-    private final WeatherDataService weatherDataService;
     private final DeliveryFeeService deliveryFeeService;
     private final ObjectMapper jsonMapper = new ObjectMapper();
 
@@ -108,24 +112,12 @@ public class DeliveryFeeController {
         List<VehicleModel> vehiclesList = vehicleRepository.findAll();
         List<VehicleDto> vehicleDtos = new ArrayList<>();
         try {
-            for (VehicleModel model: vehiclesList) {
+            for (VehicleModel model : vehiclesList) {
                 VehicleDto vehicleDto = VehicleMapper.toDto(model);
                 vehicleDtos.add(vehicleDto);
             }
 
             return getJsonResponseEntity(jsonMapper.writeValueAsString(vehicleDtos), HttpStatus.OK);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @GetMapping("api/v1/weather")
-    public ResponseEntity<String> getWeather() {
-        Observations observations = weatherDataService.requestLatestWeatherInfo();
-        weatherDataService.saveWeatherData(observations);
-
-        try {
-            return getJsonResponseEntity(jsonMapper.writeValueAsString(observations), HttpStatus.OK);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }

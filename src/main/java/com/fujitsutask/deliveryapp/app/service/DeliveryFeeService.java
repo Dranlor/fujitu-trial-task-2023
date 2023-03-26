@@ -8,6 +8,7 @@ import com.fujitsutask.deliveryapp.weather.dto.WeatherDto;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 /**
  * Service for calculating the total delivery fee.
@@ -96,7 +97,7 @@ public class DeliveryFeeService {
         final boolean conditionWindSpeedExtreme = 20 < windSpeed;
 
         if (conditionWindSpeedModerate) return vehicleDto.getWsefModerate();
-        if (conditionWindSpeedExtreme) throw new DeliveryFeeException("Usage of selected vehicle type is forbidden",
+        if (conditionWindSpeedExtreme) throw new DeliveryFeeException("Usage of selected vehicle type is forbidden.",
                 DeliveryFeeException.Reason.UNFIT_CONDITIONS_FOR_VEHICLE_TYPE);
         else return new BigDecimal(0);
     }
@@ -104,13 +105,14 @@ public class DeliveryFeeService {
     private BigDecimal getWeatherPhenomenonExtraFee(String phenomenon, VehicleDto vehicleDto)
             throws DeliveryFeeException {
 
-        final boolean conditionSnowSleet = phenomenon.toLowerCase().matches("snow|sleet");
-        final boolean conditionRain = phenomenon.toLowerCase().matches("rain");
-        final boolean conditionHailGlazeThunder = phenomenon.toLowerCase().matches("hail|glaze|thunder");
+        if (phenomenon == null) return new BigDecimal(0);
+        final boolean conditionSnowSleet = phenomenon.toLowerCase().matches(".*(snow|sleet).*");
+        final boolean conditionRain = phenomenon.toLowerCase().matches(".*(rain).*");
+        final boolean conditionHailGlazeThunder = phenomenon.toLowerCase().matches(".*(hail|glaze|thunder).*");
 
         if (conditionSnowSleet) return vehicleDto.getWpefSnowSleet();
         if (conditionRain) return vehicleDto.getWpefRain();
-        if (conditionHailGlazeThunder) throw new DeliveryFeeException("Usage of selected vehicle type is forbidden",
+        if (conditionHailGlazeThunder) throw new DeliveryFeeException("Usage of selected vehicle type is forbidden.",
                 DeliveryFeeException.Reason.UNFIT_CONDITIONS_FOR_VEHICLE_TYPE);
         else return new BigDecimal(0);
     }

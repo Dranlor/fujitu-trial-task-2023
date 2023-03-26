@@ -90,7 +90,7 @@ public class WeatherDataService {
     /**
      * Schedules a task to add new weather data to the database every 15th minute of the hour.
      */
-    @Scheduled(cron = "15 * * * *")
+    @Scheduled(cron = "15 * * * * *")
     public void updateWeatherInfo() {
         Observations latestinfo = this.requestLatestWeatherInfo();
         saveWeatherData(latestinfo);
