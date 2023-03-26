@@ -8,7 +8,6 @@ import com.fujitsutask.deliveryapp.weather.dto.WeatherDto;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.Objects;
 
 /**
  * Service for calculating the total delivery fee.
