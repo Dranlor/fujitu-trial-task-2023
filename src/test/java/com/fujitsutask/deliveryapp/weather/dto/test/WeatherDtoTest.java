@@ -25,12 +25,12 @@ public class WeatherDtoTest {
     @Test
     void testWeatherDto_Getters() {
         assert 1 == weatherDto.getId();
-        assert 12345L == weatherDto.getTimeStamp();
-        assert "Test City".equals(weatherDto.getName());
-        assert 12345 == weatherDto.getWmo();
-        assert 20.5f == weatherDto.getAirTemperature();
-        assert 10.0f == weatherDto.getWindSpeed();
-        assert "Sunny".equals(weatherDto.getWeatherPhenomenon());
+        assert weatherDto.getTimeStamp() == 12345L;
+        assert weatherDto.getName().equals("Test City");
+        assert weatherDto.getWmo() == 12345;
+        assert weatherDto.getAirTemperature() == 20.5f;
+        assert weatherDto.getWindSpeed() == 10.0f;
+        assert weatherDto.getWeatherPhenomenon().equals("Sunny");
     }
 }
 

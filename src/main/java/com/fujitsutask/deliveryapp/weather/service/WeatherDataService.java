@@ -37,7 +37,7 @@ public class WeatherDataService {
     private final XmlMapper xmlMapper;
 
     /**
-     * Request the latest weather information from the given endpoint.
+     * Request the latest weather information from the endpoint.
      *
      * @return A DTO object representing the received XML.
      */
@@ -92,8 +92,8 @@ public class WeatherDataService {
      */
     @Scheduled(cron = "15 * * * * *")
     public void updateWeatherInfo() {
-        Observations latestinfo = this.requestLatestWeatherInfo();
-        saveWeatherData(latestinfo);
+        Observations latestInfo = this.requestLatestWeatherInfo();
+        saveWeatherData(latestInfo);
     }
 
 }
