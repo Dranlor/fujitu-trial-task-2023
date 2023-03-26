@@ -14,6 +14,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -84,6 +85,15 @@ public class WeatherDataService {
     public void saveWeatherData(Observations observations) {
         List<WeatherModel> weatherModels = WeatherMapper.mapObservationsToModels(observations);
         weatherRepository.saveAll(weatherModels);
+    }
+
+    /**
+     * Schedules a task to add new weather data to the database every 15th minute of the hour.
+     */
+    @Scheduled(cron = "15 * * * *")
+    public void updateWeatherInfo() {
+        Observations latestinfo = this.requestLatestWeatherInfo();
+        saveWeatherData(latestinfo);
     }
 
 }

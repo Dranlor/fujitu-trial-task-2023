@@ -24,17 +24,4 @@ public class CityMapper {
 
         return dto;
     }
-
-    public static CityModel fromDto(CityDto dto) {
-        CityModel model = new CityModel();
-
-        model.setId(dto.getId());
-        model.setCityName(dto.getCityName());
-        model.setBaseFeeBike(dto.getBaseFeeBike());
-        model.setBaseFeeScooter(dto.getBaseFeeScooter());
-        model.setBaseFeeCar(dto.getBaseFeeCar());
-        model.setWeatherStationWmo(dto.getWeatherStationWmo());
-
-        return model;
-    }
 }

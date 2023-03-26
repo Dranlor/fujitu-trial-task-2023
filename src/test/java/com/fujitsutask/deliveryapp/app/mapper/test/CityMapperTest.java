@@ -3,7 +3,6 @@ package com.fujitsutask.deliveryapp.app.mapper.test;
 import com.fujitsutask.deliveryapp.app.dto.CityDto;
 import com.fujitsutask.deliveryapp.app.mapper.CityMapper;
 import com.fujitsutask.deliveryapp.app.model.CityModel;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -36,5 +35,19 @@ public class CityMapperTest {
         assert dto.getBaseFeeBike().equals(new BigDecimal("2.0"));
     }
 
+    /**
+     * Test if the mapping is successful when all the fields in model are null.
+     */
+    @Test
+    void testCityMapperToDto_AllFieldsNull() {
+        CityModel model = new CityModel();
 
+        CityDto cityDto = CityMapper.toDto(model);
+        assert cityDto.getId() == null;
+        assert cityDto.getCityName() == null;
+        assert cityDto.getWeatherStationWmo() == null;
+        assert cityDto.getBaseFeeCar() == null;
+        assert cityDto.getBaseFeeScooter() == null;
+        assert cityDto.getBaseFeeBike() == null;
+    }
 }

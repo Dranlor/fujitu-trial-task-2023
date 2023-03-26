@@ -5,7 +5,11 @@ import com.fujitsutask.deliveryapp.app.model.VehicleModel;
 
 public class VehicleMapper {
 
-    // Maps VehicleModel to VehicleDto
+    /**
+     * Map vehicleModel to VehicleDto.
+     * @param vehicleModel VehicleModel object.
+     * @return VehicleDto.
+     */
     public static VehicleDto toDto(VehicleModel vehicleModel) {
         VehicleDto vehicleDto = new VehicleDto();
         vehicleDto.setId(vehicleModel.getId());
@@ -18,16 +22,4 @@ public class VehicleMapper {
         return vehicleDto;
     }
 
-    // Maps VehicleDto to VehicleModel
-    public static VehicleModel fromDto(VehicleDto vehicleDto) {
-        VehicleModel vehicleModel = new VehicleModel();
-        vehicleModel.setId(vehicleDto.getId());
-        vehicleModel.setVehicleType(vehicleDto.getVehicleType());
-        vehicleModel.setAtefFreezing(vehicleDto.getAtefFreezing());
-        vehicleModel.setAtefModerate(vehicleDto.getAtefModerate());
-        vehicleModel.setWsefModerate(vehicleDto.getWsefModerate());
-        vehicleModel.setWpefSnowSleet(vehicleDto.getWpefSnowSleet());
-        vehicleModel.setWpefRain(vehicleDto.getWpefRain());
-        return vehicleModel;
-    }
 }
