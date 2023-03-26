@@ -22,6 +22,9 @@ public class CityDtoTest {
         cityDto.setBaseFeeScooter(new BigDecimal("1.5"));
     }
 
+    /**
+     * Test getters.
+     */
     @Test
     void testCityDto_Getters() {
         assert cityDto.getId() == 1;

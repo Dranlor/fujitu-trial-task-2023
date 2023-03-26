@@ -10,6 +10,9 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
+/**
+ * Maps to EXTRAFEES table in H2 database.
+ */
 @Data
 @Entity
 @Table(name = "EXTRAFEES")

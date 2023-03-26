@@ -5,36 +5,27 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fujitsutask.deliveryapp.app.dto.DeliveryFeeDto;
 import com.fujitsutask.deliveryapp.app.dto.VehicleDto;
 import com.fujitsutask.deliveryapp.app.exception.DeliveryFeeException;
+import com.fujitsutask.deliveryapp.app.mapper.CityMapper;
+import com.fujitsutask.deliveryapp.app.mapper.VehicleMapper;
 import com.fujitsutask.deliveryapp.app.model.CityModel;
 import com.fujitsutask.deliveryapp.app.model.VehicleModel;
 import com.fujitsutask.deliveryapp.app.repository.CitiesRepository;
 import com.fujitsutask.deliveryapp.app.repository.VehicleRepository;
 import com.fujitsutask.deliveryapp.app.service.DeliveryFeeService;
-import com.fujitsutask.deliveryapp.app.mapper.CityMapper;
-import com.fujitsutask.deliveryapp.app.mapper.VehicleMapper;
-import com.fujitsutask.deliveryapp.weather.domain.Observations;
 import com.fujitsutask.deliveryapp.weather.mapper.WeatherMapper;
 import com.fujitsutask.deliveryapp.weather.model.WeatherModel;
 import com.fujitsutask.deliveryapp.weather.repository.WeatherRepository;
-import com.fujitsutask.deliveryapp.weather.service.WeatherDataService;
+import lombok.AllArgsConstructor;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import lombok.AllArgsConstructor;
-import org.springframework.web.method.HandlerMethod;
-import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
-import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 
 /**

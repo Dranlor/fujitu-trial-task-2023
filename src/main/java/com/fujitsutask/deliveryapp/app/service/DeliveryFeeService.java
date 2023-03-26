@@ -80,7 +80,6 @@ public class DeliveryFeeService {
         return resultDto;
     }
 
-    // TODO: Account for negative numbers.
     private BigDecimal getAirTempExtraFee(float airTemp, VehicleDto vehicleDto) {
         final boolean conditionForFreezingTemp = airTemp < -10;
         final boolean conditionForModerateTemp = -10 <= airTemp && airTemp <= 0;

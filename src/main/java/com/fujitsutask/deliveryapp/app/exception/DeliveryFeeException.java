@@ -1,5 +1,8 @@
 package com.fujitsutask.deliveryapp.app.exception;
 
+/**
+ * Exception thrown in DeliveryFeeService.
+ */
 public class DeliveryFeeException extends RuntimeException {
 
     public enum Reason {INVALID_VEHICLE_TYPE, UNFIT_CONDITIONS_FOR_VEHICLE_TYPE, INVALID_VEHICLE_ID, INVALID_CITY_ID,

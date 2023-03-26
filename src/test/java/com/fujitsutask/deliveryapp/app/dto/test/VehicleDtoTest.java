@@ -23,7 +23,10 @@ public class VehicleDtoTest {
         vehicleDto.setWpefRain(new BigDecimal("5.0"));
         vehicleDto.setWpefSnowSleet(new BigDecimal("1.12"));
     }
-    
+
+    /**
+     * Test getters.
+     */
     @Test
     void testVehicleDto_Getters() {
         assert vehicleDto.getVehicleType().equals("Bike");

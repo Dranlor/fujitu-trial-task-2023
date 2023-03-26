@@ -59,6 +59,12 @@ public class DeliveryFeeServiceTest {
         when(vehicleDto.getWpefSnowSleet()).thenReturn(new BigDecimal("2.5"));
     }
 
+    /**
+     * Helper method for setting up weather dto mock with correct fields.
+     * @param phenomenon Weather phenomenon field.
+     * @param windSpeed Wind speeed field.
+     * @param airTemp Air temperature field.
+     */
     private void setWeatherCondition(String phenomenon, float windSpeed, float airTemp) {
         when(weatherDto.getWeatherPhenomenon()).thenReturn(phenomenon);
         when(weatherDto.getWindSpeed()).thenReturn(windSpeed);
@@ -91,6 +97,9 @@ public class DeliveryFeeServiceTest {
         assert resultDto.getTotalPrice().equals(new BigDecimal("3.0"));
     }
 
+    /**
+     * Test total fee calculation for scooter with normal weather conditions (no extra fees from the weather).
+     */
     @Test
     void testCalculateDeliveryFee_ScooterNoWeatherFees() {
         when(vehicleDto.getVehicleType()).thenReturn("Scooter");

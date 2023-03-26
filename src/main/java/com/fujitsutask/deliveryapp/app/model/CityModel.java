@@ -10,6 +10,9 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
+/**
+ * Maps to CITIES table in H2 database.
+ */
 @Entity
 @Data
 @Table(name = "CITIES")

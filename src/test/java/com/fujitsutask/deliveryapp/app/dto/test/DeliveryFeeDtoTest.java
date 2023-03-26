@@ -22,6 +22,9 @@ public class DeliveryFeeDtoTest {
         deliveryFeeDto.setTotalPrice(new BigDecimal("3.0"));
     }
 
+    /**
+     * Test getters.
+     */
     @Test
     void testDeliveryFeeDto_Getters() {
         assert deliveryFeeDto.getError() == null;
