@@ -7,6 +7,11 @@ public class CityMapper {
 
     private CityMapper() {}
 
+    /**
+     * Map fields from given CityModel object to its equivalent CityDto object.
+     * @param model CityModel object.
+     * @return CityDto object.
+     */
     public static CityDto toDto(CityModel model) {
         CityDto dto = new CityDto();
 
